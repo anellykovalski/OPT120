@@ -1,18 +1,27 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const conexao = require('conexaoMySql.js');
-const path = require('path');
+const cors = require('cors');
+
+const rotasAtividade = require('../rotas/rotas_atividade');
+const rotasUsuario = require('../rotas/rotas_usuario');
+const rotasUsuarioAtividade = require('../rotas/rotas_usuario_atividade');
+
 const app = express();
-const port = process.env.PORT;
 
-// Rota Padrao ao acessar a localhost:3010 isso será informado
+app.get('/', (req, res) => {
+  res.send('Servidor Rodando Corretamente!');
+});
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(cors());
 
-const port = 3001;
-app.listen(port, () => {
-  console.log(`Aplicativo Express.js rodando na porta ${port}`);
+app.use(rotasAtividade);
+app.use(rotasUsuario);
+app.use(rotasUsuarioAtividade);
+
+// Inicia o servidor
+const PORT = 3020;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
