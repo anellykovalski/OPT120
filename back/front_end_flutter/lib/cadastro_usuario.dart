@@ -1,115 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'cadastro_usuario.dart' as usuario;
-import 'cadastro_atividade.dart' as atividade;
-import 'cadastro_usuario_atividade.dart' as usuario_atividade;
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Projeto DevMovel',
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      home: MyHomePage(),
-      routes: {
-        '/cadastroUsuario': (context) => CadastroUsuarioScreen(),
-        '/cadastroAtividade': (context) => atividade.CadastroAtividadeScreen(),
-        '/cadastroUsuarioAtividade': (context) => usuario_atividade.CadastroUsuarioAtividadeScreen(),
-      },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  bool _isDarkMode = false;
-
-  void _toggleTheme() {
-    setState(() {
-      _isDarkMode = !_isDarkMode;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Menu',
-      theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Menu',
-            style: TextStyle(fontSize: 24),
-          ),
-          toolbarHeight: 100,
-        ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.pink,
-                ),
-                child: Center(
-                  child: Text(
-                    'Opções',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.person_add),
-                title: const Text('Cadastrar Usuário'),
-                onTap: () {
-                  Navigator.pushNamed(context, '/cadastroUsuario');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.add_circle),
-                title: const Text('Cadastrar Atividade'),
-                onTap: () {
-                  Navigator.pushNamed(context, '/cadastroAtividade');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.group_add),
-                title: const Text('Cadastrar Usuário Atividade'),
-                onTap: () {
-                  Navigator.pushNamed(context, '/cadastroUsuarioAtividade');
-                },
-              ),
-            ],
-          ),
-        ),
-        body: const Center(
-          child: Text(
-            'Conteúdo da página!!!',
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _toggleTheme,
-          child: const Icon(Icons.brightness_4),
-          backgroundColor: Colors.pink,
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      ),
-    );
-  }
-}
 
 class CadastroUsuarioScreen extends StatefulWidget {
   const CadastroUsuarioScreen({Key? key}) : super(key: key);
@@ -131,7 +21,7 @@ class _CadastroUsuarioScreenState extends State<CadastroUsuarioScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://localhost:3010/api/usuario'),
+        Uri.parse('http://localhost:3001/usuario'), // URL atualizada aqui
         body: {'nome': nome, 'email': email, 'senha': senha},
       );
 
@@ -206,7 +96,7 @@ class _CadastroUsuarioScreenState extends State<CadastroUsuarioScreen> {
                       }
                       final emailRegExp =
                           RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                      if (!emailRegExp.hasMatch(value!)) {
+                      if (!emailRegExp.hasMatch(value)) {
                         return 'Por favor, insira um email válido';
                       }
                       return null;
