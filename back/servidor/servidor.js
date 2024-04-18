@@ -23,5 +23,5 @@ app.use(rotasUsuarioAtividade);
 // Inicia o servidor
 const PORT = 3020;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+  console.log(`Servidor rodando na porta ${3020}`);
+}); 

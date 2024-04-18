@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const connection = require('../servidor/ConexaoMySql.js');
+const connection = require('../servidor/conexaoMySql.js');
 
 // Rota para obter todos os usuários
 router.get('/usuario', (req, res) => {

@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const connection = require('../servidor/ConexaoMySql.js');
+const connection = require('../servidor/conexaoMySql.js');
 
 // Rota para obter todas as relações entre usuários e atividade
 router.get('/usuario-atividade', (req, res) => {

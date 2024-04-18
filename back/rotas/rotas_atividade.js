@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const connection = require('../servidor/ConexaoMySql.js');
+const connection = require('../servidor/conexaoMySql.js');
 
 // Rota para obter todas as atividade
 router.get('/atividade', (req, res) => {
@@ -34,7 +34,7 @@ router.get('/atividade/:id', (req, res) => {
 // Rota para criar uma nova atividade
 router.post('/atividade', (req, res) => {
   const { TITULO, DESC, DATA } = req.body;
-  connection.query('INSERT INTO Atividade (TITULO, DESC, DATA) VALUES (?, ?, ?)', [TITULO, DESC, DATA], (err, result) => {
+  connection.query('INSERT INTO Atividade (TITULO, `DESC`, `DATA`) VALUES (?, ?, ?)', [TITULO, DESC, DATA], (err, result) => {
     if (err) {
       res.status(500).json({ erro: err.message });
       return;
@@ -47,7 +47,7 @@ router.post('/atividade', (req, res) => {
 router.put('/atividade/:id', (req, res) => {
   const id = req.params.id;
   const { TITULO, DESC, DATA } = req.body;
-  connection.query('UPDATE Atividade SET TITULO = ?, DESC = ?, DATA = ? WHERE ID_ATIVIDADE = ?', [TITULO, DESC, DATA, id], (err, result) => {
+  connection.query('UPDATE Atividade SET TITULO = ?, `DESC` = ?, `DATA` = ? WHERE ID_ATIVIDADE = ?', [TITULO, DESC, DATA, id], (err, result) => {
     if (err) {
       res.status(500).json({ erro: err.message });
       return;

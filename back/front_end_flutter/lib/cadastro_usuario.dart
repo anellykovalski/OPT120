@@ -21,12 +21,12 @@ class _CadastroUsuarioScreenState extends State<CadastroUsuarioScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://localhost:3001/usuario'), // URL atualizada aqui
+        Uri.parse('http://localhost:3020/usuario'), // URL atualizada aqui
         body: {'nome': nome, 'email': email, 'senha': senha},
       );
 
       // Verificar o status da resposta
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         // Sucesso
         print('Usuário cadastrado com sucesso');
       } else {

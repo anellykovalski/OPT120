@@ -75,16 +75,16 @@ class _CadastroAtividadeScreenState extends State<CadastroAtividadeScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://localhost:3010/api/atividade'),
+        Uri.parse('http://localhost:3020/atividade'),
         body: {
-          'titulo': titulo,
-          'descricao': descricao,
-          'dataEntrega': dataEntrega
+          'TITULO': titulo,
+          'DESC': descricao,
+          'DATA': dataEntrega
         },
       );
 
       // Verificar o status da resposta
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         // Sucesso
         print('Atividade cadastrada com sucesso');
       } else {
